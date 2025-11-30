@@ -1,12 +1,6 @@
-const express = require("express");
-const app = express();
-
-app.get("/", (req, res) => {
-    res.send("Hello from Jenkins CI/CD!");
-});
-
+// app.js
 function sum(a, b) {
-    return a + b;
+  return a + b;
 }
 
-module.exports = { app, sum };
+module.exports = { sum };
