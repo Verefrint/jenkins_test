@@ -10,18 +10,22 @@ services:
     ports:
       - "8080:8080"
       - "50000:50000"
+    environment:
+      DOCKER_HOST: tcp://dind:2375
+      DOCKER_TLS_CERTDIR: ""   # отключаем TLS, чтобы было проще
     volumes:
       - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock  
     depends_on:
       - dind
 
   dind:
-    image: docker:23.0-dind
-    privileged: true
+    build:
+      context: .
+      dockerfile: Dockerfile.dind
     container_name: dind
+    privileged: true
     environment:
-      - DOCKER_TLS_CERTDIR=
+      DOCKER_TLS_CERTDIR: ""
     volumes:
       - docker_data:/var/lib/docker
 
