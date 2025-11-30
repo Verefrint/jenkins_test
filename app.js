@@ -1,6 +1,5 @@
-// app.js
-function sum(a, b) {
-  return a + b;
+function sum(a, c) {
+  return a + c;
 }
 
 module.exports = { sum };
