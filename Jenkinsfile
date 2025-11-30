@@ -1,12 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+        DOCKER_HOST = "tcp://dind:2375"
+        DOCKER_TLS_CERTDIR = ""
+    }
+
     stages {
         stage('Check docker') {
             steps {
                 sh 'whoami'
+                sh 'echo DOCKER_HOST=$DOCKER_HOST'
                 sh 'docker version'
-                sh 'docker info'
             }
         }
 
@@ -24,7 +29,6 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // на всякий случай убираем старый контейнер
                 sh 'docker rm -f node-app || true'
                 sh 'docker run -d --name node-app -p 3000:3000 node-app'
             }
