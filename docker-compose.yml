@@ -28,6 +28,9 @@ services:
       DOCKER_TLS_CERTDIR: ""
     volumes:
       - docker_data:/var/lib/docker
+    dns:
+      - 8.8.8.8     # Google DNS
+      - 1.1.1.1     # Cloudflare DNS
 
 volumes:
   jenkins_home:
